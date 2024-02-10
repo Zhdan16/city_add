@@ -56,6 +56,7 @@ public class PersonAdd {
         }catch (Exception e){
             manager.getTransaction().rollback();
         }
+        System.out.println();
         manager.close();
         factory.close();
     }
