@@ -6,6 +6,7 @@ import jakarta.persistence.Persistence;
 import zhdans.city_people.entity.City;
 import zhdans.city_people.entity.Person;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PersonAdd {
@@ -19,30 +20,50 @@ public class PersonAdd {
 
         String name = "";
         City city = new City();
+
         Person person = new Person();
 
         if (num == 1){
-            System.out.print("\nВведите id человека: ");
-            String person_id = scanner.nextLine();
+            while ( true){
+                System.out.print("\nВведите id человека: ");
+                String person_id = scanner.nextLine();
 
-            System.out.print("Введите имя человека: ");
-            name = scanner.nextLine();
+                System.out.print("Введите имя человека: ");
+                name = scanner.nextLine();
 
-            System.out.print("Введите id города: ");
-            int city_id = Integer.parseInt(scanner.nextLine());
+                System.out.print("Введите id города: ");
+                int city_id = Integer.parseInt(scanner.nextLine());
 
-            city = manager.find(City.class, city_id);
-            person = manager.find(Person.class, person_id);
+                city = manager.find(City.class, city_id);
+                try {
+                    city.getName();
+                    break;
+                }catch (NullPointerException n){
+                    System.out.println("Города с данным id не существует, повторите попытку");
+                }
+                person = manager.find(Person.class, person_id);
+            }
+
 
         }else if (num == 2){
-            System.out.print("\nВведите имя человека: ");
-            name = scanner.nextLine();
+            while (true){
+                System.out.print("\nВведите имя человека: ");
+                name = scanner.nextLine();
 
-            System.out.print("Введите id города: ");
-            int city_id = Integer.parseInt(scanner.nextLine());
+                System.out.print("Введите id города: ");
+                int city_id = Integer.parseInt(scanner.nextLine());
 
-            city = manager.find(City.class, city_id);
-            person = new Person();
+
+                city = manager.find(City.class, city_id);
+                try {
+                    city.getName();
+                    break;
+                }catch (NullPointerException n){
+                    System.out.println("Города с данным id не существует, повторите попытку");
+                }
+                person = new Person();
+            }
+
 
         }
 
